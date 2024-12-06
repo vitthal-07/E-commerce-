@@ -1,33 +1,78 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { ShopContext } from "../context/ShopContext";
-import Title from "./Title";
 import { Product } from "../types";
+import Title from "./Title";
 import ProductItem from "./ProductItem";
+import { motion, useInView } from "framer-motion";
 
-const LatestCollection = () => {
+type RelatedProductsProps = {
+  category: string;
+  subCategory: string;
+};
+
+const RelatedProducts = ({ category, subCategory }: RelatedProductsProps) => {
   const { products } = useContext(ShopContext);
-  const [latestProducts, setLatestProducts] = useState<Product[]>();
+  const [related, setRelated] = useState<Product[]>([]);
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true });
 
   useEffect(() => {
-    setLatestProducts(products.slice(0, 10));
-  }, []);
+    if (products.length > 0) {
+      let productsCopy = [...products];
+      productsCopy = productsCopy.filter((product) => {
+        return (
+          product.category === category && product.subCategory === subCategory
+        );
+      });
+      setRelated(productsCopy.slice(0, 5));
+    }
+  }, [products]);
+
   return (
-    <div className="my-10">
-      <div className="text-center py-8 text-3xl">
-        <Title text1="LATEST" text2="COLLECTION" />
-        <p className="w-3/4 m-auto text-xs sm:text-base text-gray-600">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet autem
-          voluptatum aut iste, facilis aperiam cumque?
-        </p>
+    <motion.div
+      className="my-24"
+      ref={sectionRef}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8 }}
+    >
+      <div className="text-center text-3xl py-2">
+        <Title text1="RELATED" text2="PRODUCTS" />
       </div>
-      {/* rendering products */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
-        {latestProducts?.map((product,index) => (
-        <ProductItem key={index} Id={product._id} image={product.image} name={product.name} price={product.price} />
+
+      <motion.div
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6"
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.2,
+            },
+          },
+        }}
+      >
+        {related.map((item, index) => (
+          <motion.div
+            key={index}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
+          >
+            <ProductItem
+              Id={item._id}
+              name={item.name}
+              price={item.price}
+              image={item.image}
+            />
+          </motion.div>
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
-export default LatestCollection;
+export default RelatedProducts;

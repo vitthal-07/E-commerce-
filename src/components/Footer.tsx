@@ -1,23 +1,39 @@
 import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
+import { motion } from "motion/react";
 
 const Footer = () => {
   return (
-    <footer className="mt-40 px-6 sm:px-12 lg:px-20 text-sm text-gray-600">
+    <motion.footer
+      className="mt-40 px-6 sm:px-12 lg:px-20 text-sm text-gray-600"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       {/* Top Section */}
       <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10">
         {/* Logo and About */}
-        <div>
+        <motion.div
+          className="w-full sm:w-2/3"
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
+        >
           <img className="mb-5 w-32" src={assets.logo} alt="Company Logo" />
-          <p className="w-full sm:w-2/3 leading-relaxed">
+          <p className="leading-relaxed">
             Delivering quality and innovation to enhance your daily life. Our
             mission is to provide exceptional service while fostering
             connections and building trust.
           </p>
-        </div>
+        </motion.div>
 
         {/* Navigation Links */}
-        <div>
+        <motion.div
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
+        >
           <h3 className="text-xl font-medium mb-5 text-gray-800">Explore</h3>
           <ul className="flex flex-col gap-2">
             <li>
@@ -53,10 +69,14 @@ const Footer = () => {
               </Link>
             </li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* Contact Information */}
-        <div>
+        <motion.div
+          initial={{ x: 20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.6, type: "spring", stiffness: 100 }}
+        >
           <h3 className="text-xl font-medium mb-5 text-gray-800">Contact Us</h3>
           <ul className="flex flex-col gap-2">
             <li className="flex items-center gap-2">
@@ -66,17 +86,21 @@ const Footer = () => {
               📧 <span>vitthalbiradar@example.com</span>
             </li>
           </ul>
-        </div>
+        </motion.div>
       </div>
 
       {/* Bottom Section */}
-      <div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.8, duration: 0.5 }}
+      >
         <hr className="border-gray-300" />
         <p className="py-5 text-center text-gray-500">
           © 2024 MyWeb.com. All rights reserved.
         </p>
-      </div>
-    </footer>
+      </motion.div>
+    </motion.footer>
   );
 };
 

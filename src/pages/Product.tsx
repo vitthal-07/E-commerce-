@@ -4,6 +4,7 @@ import { assets } from "../assets/assets";
 import RelatedProducts from "../components/RelatedProducts";
 import { ShopContext } from "../context/ShopContext";
 import { Product } from "../types";
+import { motion } from "motion/react";
 
 const ProductPage = () => {
   const { productId } = useParams<string>();
@@ -25,79 +26,189 @@ const ProductPage = () => {
   useEffect(() => {
     fetchProductData();
   }, [productId]);
+
   return productData ? (
-    <div className="border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100">
-      <div className="flex gap-12 sm:gap-12flex-col sm:flex-row">
-        {/* Product image */}
+    <motion.div
+      className="border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <div className="flex gap-12 sm:gap-12 flex-col sm:flex-row">
+        {/* Product Image */}
         <div className="flex-1 flex flex-col-reverse gap-3 sm:flex-row">
-          <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full">
+          <motion.div
+            className="flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
             {productData.image.map((item, index) => (
-              <img
+              <motion.img
                 key={index}
                 src={item}
                 alt={productData.name}
                 className="w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer"
+                whileHover={{
+                  scale: 1.1,
+                  rotate: 5,
+                }}
+                transition={{ type: "spring", stiffness: 300 }}
                 onClick={() => setImage(item)}
               />
             ))}
-          </div>
-          <div className="w-full sm:w-[80%]">
-            <img className="w-full h-auto" src={image} alt="" />
-          </div>
+          </motion.div>
+
+          <motion.div
+            className="w-full sm:w-[80%]"
+            whileHover={{
+              scale: 1.05,
+              rotate: 2,
+            }}
+            transition={{
+              duration: 0.3,
+              type: "spring",
+              stiffness: 400,
+            }}
+          >
+            <motion.img
+              className="w-full h-auto"
+              src={image}
+              alt={productData.name}
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              transition={{
+                type: "spring",
+                stiffness: 200,
+                damping: 20,
+              }}
+            />
+          </motion.div>
         </div>
+
         {/* Product Info */}
-        <div className="flex-1">
+        <motion.div
+          className="flex-1"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
           <h1 className="text-2xl mt-2 font-bold">{productData.name}</h1>
-          <div className="flex items-center mt-2 gap-1">
-            <img src={assets.star_icon} alt="" />
-            <img src={assets.star_icon} alt="" />
-            <img src={assets.star_icon} alt="" />
-            <img src={assets.star_icon} alt="" />
-            <img src={assets.star_dull_icon} alt="" />
+          <motion.div
+            className="flex items-center mt-2 gap-1"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+          >
+            {Array(4)
+              .fill("")
+              .map((_, index) => (
+                <motion.img
+                  key={index}
+                  src={assets.star_icon}
+                  alt="star icon"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.2 }}
+                />
+              ))}
+            <motion.img
+              src={assets.star_dull_icon}
+              alt="star dull icon"
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.2 }}
+            />
             <p className="pl-2">102</p>
-          </div>
-          <p className="text-gray-500 mt-3">{productData.description}</p>
-          <p className="text-2xl font-bold mt-5">
+          </motion.div>
+          <motion.p
+            className="text-gray-500 mt-3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+          >
+            {productData.description}
+          </motion.p>
+          <motion.p
+            className="text-2xl font-bold mt-5"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2 }}
+          >
             {currency}
             {productData.price}
-          </p>
-          <div className="flex flex-col gap-4 my-8">
+          </motion.p>
+
+          {/* Size Selection */}
+          <motion.div
+            className="flex flex-col gap-4 my-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.3 }}
+          >
             <p>Select size</p>
             <div className="flex gap-2">
               {productData.sizes.map((item, index) => (
-                <button
+                <motion.button
                   key={index}
                   className={`border border-gray-100 px-4 py-2 ${
                     item === size ? "bg-gray-800 text-white" : ""
                   }`}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
                   onClick={() => setSize(item)}
                 >
                   {item}
-                </button>
+                </motion.button>
               ))}
             </div>
-          </div>
-          <button
+          </motion.div>
+
+          <motion.button
             onClick={() => addToCart(productData._id, size)}
             className="bg-black text-white text-sm py-3 px-8 active:bg-gray-700"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.3 }}
           >
             Add to cart
-          </button>
+          </motion.button>
           <hr className="mt-8 sm:w-4/5" />
-          <div className="textsm text-gray-500 mt-5 flex flex-col gap-1">
+          <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
             <p>100% Original product.</p>
             <p>Cash on delivery is available.</p>
             <p>Easy return and exchange policy within 7 days.</p>
           </div>
-        </div>
+        </motion.div>
       </div>
-      {/* Descriptin and review section*/}
-      <div className="mt-20">
+
+      {/* Description and Review Section */}
+      <motion.div
+        className="mt-20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+      >
         <div className="flex">
-          <b className="border px-5 py-3 text-sm">Description</b>
-          <p className="border px-5 py-3 text-sm">Reviews (102)</p>
+          <motion.b
+            className="border px-5 py-3 text-sm"
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 200 }}
+          >
+            Description
+          </motion.b>
+          <motion.p
+            className="border px-5 py-3 text-sm"
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 200 }}
+          >
+            Reviews (102)
+          </motion.p>
         </div>
-        <div className="flex flex-col gap-4 p-6 text-sm text-gray-500">
+        <motion.div
+          className="flex flex-col gap-4 p-6 text-sm text-gray-500"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.7 }}
+        >
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae esse
             excepturi vero voluptatum fuga atque eum veritatis aperiam laborum
@@ -110,14 +221,21 @@ const ProductPage = () => {
             eveniet eum doloremque dolores rem voluptate labore odit veritatis.
             Tempora, quis!
           </p>
-        </div>
-      </div>
-      {/* Display related products */}
-      <RelatedProducts
-        category={productData.category}
-        subCategory={productData.subCategory}
-      />
-    </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Display Related Products */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.8 }}
+      >
+        <RelatedProducts
+          category={productData.category}
+          subCategory={productData.subCategory}
+        />
+      </motion.div>
+    </motion.div>
   ) : (
     <div className="opacity-0"></div>
   );
