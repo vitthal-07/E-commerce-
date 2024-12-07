@@ -134,7 +134,14 @@ const Navbar = () => {
             <img src={assets.cross_icon} className="h-4 rotate-180" alt="" />
             <p>Back</p>
           </div>
-          {["Home", "Collection", "About", "Contact"].map((item, index) => (
+          <NavLink
+            to="/"
+            className="py-2 pl-6 border"
+            onClick={() => setVisible(false)}
+          >
+            HOME
+          </NavLink>
+          {["Collection", "About", "Contact"].map((item, index) => (
             <NavLink
               key={index}
               to={`/${item.toLowerCase()}`}
