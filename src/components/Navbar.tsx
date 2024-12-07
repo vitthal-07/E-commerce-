@@ -121,11 +121,10 @@ const Navbar = () => {
       </div>
 
       {/* Sidebar menu for small screens */}
-      <motion.div
-        className="fixed top-0 left-0 h-full bg-white shadow-lg z-40"
-        initial={{ x: "-100%" }}
-        animate={{ x: visible ? "0%" : "-100%" }}
-        transition={{ duration: 0.4 }}
+      <div
+        className={`min-h-[100vh] absolute top-0 left-0 overflow-hidden bg-white transition-all ${
+          visible ? "w-full" : "w-0"
+        }`}
       >
         <div className="flex flex-col text-gray-600">
           <div
@@ -146,7 +145,7 @@ const Navbar = () => {
             </NavLink>
           ))}
         </div>
-      </motion.div>
+      </div>
     </motion.nav>
   );
 };
