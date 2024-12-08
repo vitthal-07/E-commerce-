@@ -10,14 +10,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "#021526",
+        background: "#000814",
         primary: {
-          DEFAULT: "#433878",
-          foreground: "#433878",
+          DEFAULT: "#001D3D",
+          foreground: "#001D3D",
         },
         secondary: {
-          DEFAULT: "#6EACDA",
-          foreground: "#6EACDA",
+          DEFAULT: "#003566",
+          foreground: "#003566",
         },
         text: "#E2E2B6",
         foreground: "hsl(var(--foreground))",
