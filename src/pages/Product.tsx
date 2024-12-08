@@ -1,22 +1,21 @@
+import { motion } from "motion/react";
 import { useContext, useEffect, useState } from "react";
+import { FaWhatsapp } from "react-icons/fa";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { assets } from "../assets/assets";
 import RelatedProducts from "../components/RelatedProducts";
 import { ShopContext } from "../context/ShopContext";
 import { Product } from "../types";
-import { motion } from "motion/react";
-import { toast } from "react-toastify";
-import { FaWhatsapp } from "react-icons/fa";
 
 const ProductPage = () => {
   const { productId } = useParams<string>();
-  const { products, currency, addToCart, phoneNumber } =
-    useContext(ShopContext);
+  const { products, currency, phoneNumber } = useContext(ShopContext);
   const [productData, setProductData] = useState<Product>();
   const [image, setImage] = useState<string>("");
   const [size, setSize] = useState<string>("");
 
-  const handleBuyNow = (productId: string, size: string) => {
+  const handleOrder = (size: string) => {
     if (!size) {
       toast.error("Please select a size before proceeding!");
       return;
@@ -183,7 +182,7 @@ const ProductPage = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.3 }}
-            onClick={() => handleBuyNow(productData._id, size)}
+            onClick={() => handleOrder(size)}
           >
             <FaWhatsapp className="text-green-500 text-3xl" />
             <h2 className="text-lg font-semibold text-text">
