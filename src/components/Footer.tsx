@@ -1,11 +1,17 @@
 import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { motion } from "motion/react";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+} from "react-icons/fa";
 
 const Footer = () => {
   return (
     <motion.footer
-      className="bg-primary border-t border-secondary mt-40 px-6 sm:px-12 lg:px-20 text-sm text-text"
+      className="bg-secondary border-t border-primary mt-40 px-6 sm:px-12 lg:px-20 text-sm text-background"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -34,7 +40,7 @@ const Footer = () => {
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
         >
-          <h3 className="text-xl font-medium mb-5 text-text">Explore</h3>
+          <h3 className="text-xl font-medium mb-5 text-background">Explore</h3>
           <ul className="flex flex-col gap-2">
             <li>
               <Link to="/" className="duration-200">
@@ -65,7 +71,9 @@ const Footer = () => {
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: 0.6, type: "spring", stiffness: 100 }}
         >
-          <h3 className="text-xl font-medium mb-5 text-text">Contact Us</h3>
+          <h3 className="text-xl font-medium mb-5 text-background">
+            Contact Us
+          </h3>
           <ul className="flex flex-col gap-2">
             <li className="flex items-center gap-2">
               📞 <span>+91 23121 13671</span>
@@ -74,6 +82,40 @@ const Footer = () => {
               📧 <span>vitthalbiradar@example.com</span>
             </li>
           </ul>
+          <div className="flex gap-4 mt-5">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary hover:text-text transition-colors bg-background rounded-full p-1.5"
+            >
+              <FaFacebookF size={20} />
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary hover:text-text transition-colors bg-background rounded-full p-1.5"
+            >
+              <FaTwitter size={20} />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary hover:text-text transition-colors bg-background rounded-full p-1.5"
+            >
+              <FaInstagram size={20} />
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary hover:text-text transition-colors bg-background rounded-full p-1.5"
+            >
+              <FaLinkedinIn size={20} />
+            </a>
+          </div>
         </motion.div>
       </div>
 
@@ -83,8 +125,8 @@ const Footer = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8, duration: 0.5 }}
       >
-        <hr className="border-secondary" />
-        <p className="py-5 text-center text-text">
+        <hr className="border-primary" />
+        <p className="py-5 text-center text-background">
           © 2024 MyWeb.com. All rights reserved.
         </p>
       </motion.div>

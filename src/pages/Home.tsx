@@ -5,12 +5,12 @@ import OurPolicy from "../components/OurPolicy";
 
 const Home = () => {
   return (
-    <>
+    <div className="px-2 md:px-10">
       <Hero />
       <LatestCollection />
       <OurPolicy />
       <NewsLetterBox />
-    </>
+    </div>
   );
 };
 

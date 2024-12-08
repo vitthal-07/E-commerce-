@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useContext, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
@@ -21,7 +21,7 @@ const Contact = () => {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100"
+      className="transition-opacity ease-in duration-500 opacity-100"
     >
       {/* Page Title */}
       <motion.div
@@ -30,14 +30,14 @@ const Contact = () => {
         transition={{ delay: 0.2, duration: 0.8 }}
         className="text-center mb-10"
       >
-        <h1 className="text-4xl font-bold text-gray-800">Contact Us</h1>
-        <p className="text-gray-600 mt-2">
+        <h1 className="text-4xl font-bold text-text">Contact Us</h1>
+        <p className="text-secondary mt-2">
           Get in touch with us through WhatsApp or explore our products!
         </p>
       </motion.div>
 
       {/* Contact Section */}
-      <div className="max-w-4xl mx-auto bg-white p-6 shadow-lg rounded-lg">
+      <div className="max-w-4xl bg-primary mx-auto p-6 shadow-md rounded-lg">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -45,15 +45,15 @@ const Contact = () => {
           className="flex flex-col items-center text-center"
         >
           <FaWhatsapp className="text-green-500 text-6xl mb-4" />
-          <h2 className="text-2xl font-semibold text-gray-800">
+          <h2 className="text-2xl font-semibold text-text">
             Contact via WhatsApp
           </h2>
-          <p className="text-gray-600 mt-2">
+          <p className="text-secondary mt-2">
             Have questions? Reach out to us directly via WhatsApp. We're here to
             help!
           </p>
           <textarea
-            className="border border-gray-300 py-1.5 px-3.5 w-full mt-4"
+            className="border border-secondary bg-background text-text py-1.5 px-3.5 w-full mt-4"
             placeholder="Type your message here..."
             rows={4}
             value={message}
@@ -61,7 +61,7 @@ const Contact = () => {
           />
 
           <button
-            className="bg-black text-white text-sm my-8 py-3 px-8 active:bg-gray-700"
+            className="bg-primary text-text text-sm my-8 py-3 px-8 active:bg-gray-700"
             onClick={handleWhatsAppClick}
           >
             Send Message

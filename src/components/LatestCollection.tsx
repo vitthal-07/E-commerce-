@@ -12,7 +12,7 @@ const LatestCollection = () => {
   const isInView = useInView(sectionRef, { once: true }); // Trigger animation once when in view
 
   useEffect(() => {
-    setLatestProducts(products.slice(0, 10));
+    setLatestProducts(products.slice(0, 8));
   }, []);
 
   return (
@@ -37,7 +37,7 @@ const LatestCollection = () => {
       </div>
       {/* Rendering Products */}
       <motion.div
-        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-6"
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={{

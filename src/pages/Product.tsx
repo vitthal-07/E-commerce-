@@ -2,8 +2,6 @@ import { motion } from "motion/react";
 import { useContext, useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useParams } from "react-router-dom";
-import { toast } from "react-toastify";
-import { assets } from "../assets/assets";
 import RelatedProducts from "../components/RelatedProducts";
 import { ShopContext } from "../context/ShopContext";
 import { Product } from "../types";
@@ -13,15 +11,9 @@ const ProductPage = () => {
   const { products, currency, phoneNumber } = useContext(ShopContext);
   const [productData, setProductData] = useState<Product>();
   const [image, setImage] = useState<string>("");
-  const [size, setSize] = useState<string>("");
 
-  const handleOrder = (size: string) => {
-    if (!size) {
-      toast.error("Please select a size before proceeding!");
-      return;
-    }
-
-    const message = `Hello, I am interested in buying the ${productData?.name} (Size: ${size}) priced at ${currency}${productData?.price}. Please provide further details.`;
+  const handleOrder = () => {
+    const message = `Hello, I am interested in buying the ${productData?.name} priced at ${currency}${productData?.price}. Please provide further details.`;
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       message
     )}`;
@@ -109,31 +101,6 @@ const ProductPage = () => {
           transition={{ delay: 0.5 }}
         >
           <h1 className="text-2xl mt-2 font-bold">{productData.name}</h1>
-          <motion.div
-            className="flex items-center mt-2 gap-1"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
-          >
-            {Array(4)
-              .fill("")
-              .map((_, index) => (
-                <motion.img
-                  key={index}
-                  src={assets.star_icon}
-                  alt="star icon"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.2 }}
-                />
-              ))}
-            <motion.img
-              src={assets.star_dull_icon}
-              alt="star dull icon"
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.2 }}
-            />
-            <p className="pl-2">102</p>
-          </motion.div>
           <motion.p
             className="text-secondary mt-3"
             initial={{ opacity: 0 }}
@@ -152,40 +119,15 @@ const ProductPage = () => {
             {productData.price}
           </motion.p>
 
-          {/* Size Selection */}
-          <motion.div
-            className="flex flex-col gap-4 my-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.3 }}
-          >
-            <p>Select size</p>
-            <div className="flex gap-2">
-              {productData.sizes.map((item, index) => (
-                <motion.button
-                  key={index}
-                  className={`border border-secondary px-4 py-2 ${
-                    item === size ? "bg-primary text-text" : ""
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
-                  onClick={() => setSize(item)}
-                >
-                  {item}
-                </motion.button>
-              ))}
-            </div>
-          </motion.div>
-
           <motion.button
-            className="bg-primary flex gap-2 text-text text-md py-2 px-4 active:bg-secondary cursor-pointer"
+            className="bg-primary flex gap-2 text-text text-md py-2 px-4 active:bg-secondary cursor-pointer mt-10"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.3 }}
-            onClick={() => handleOrder(size)}
+            onClick={() => handleOrder()}
           >
-            <FaWhatsapp className="text-green-500 text-3xl" />
-            <h2 className="text-lg font-semibold text-text">
+            <FaWhatsapp className="text-green-500 text-2xl" />
+            <h2 className="text-md font-medium text-text">
               Contact for bulk order
             </h2>
           </motion.button>
@@ -213,13 +155,6 @@ const ProductPage = () => {
           >
             Description
           </motion.b>
-          <motion.p
-            className="border px-5 py-3 text-sm"
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
-            Reviews (102)
-          </motion.p>
         </div>
         <motion.div
           className="flex flex-col gap-4 p-6 text-sm text-secondary"

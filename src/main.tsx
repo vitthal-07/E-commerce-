@@ -5,13 +5,9 @@ import App from "./App";
 import ShopContextProvider from "./context/ShopContext";
 import "./index.css";
 import About from "./pages/About";
-import Cart from "./pages/Cart";
 import Collection from "./pages/Collection";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Orders from "./pages/Orders";
-import Checkout from "./pages/Checkout";
 import Product from "./pages/Product";
 
 const router = createBrowserRouter([
@@ -32,24 +28,8 @@ const router = createBrowserRouter([
         element: <Collection />,
       },
       {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/orders",
-        element: <Orders />,
-      },
-      {
-        path: "/checkout",
-        element: <Checkout />,
-      },
-      {
         path: "/product/:productId",
         element: <Product />,
-      },
-      {
-        path: "/cart",
-        element: <Cart />,
       },
       {
         path: "/contact",
