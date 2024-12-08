@@ -67,6 +67,7 @@ const RelatedProducts = ({ category, subCategory }: RelatedProductsProps) => {
               name={item.name}
               price={item.price}
               image={item.image}
+              description={item.description}
             />
           </motion.div>
         ))}
