@@ -9,16 +9,23 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { motion } from "motion/react"; 
+import { motion } from "motion/react";
 
 type ProductItemProps = {
   Id: string;
   image: string[];
   name: string;
   price: number;
+  description: string;
 };
 
-const ProductItem = ({ Id, image, name, price }: ProductItemProps) => {
+const ProductItem = ({
+  Id,
+  image,
+  name,
+  price,
+  description,
+}: ProductItemProps) => {
   const { currency } = useContext(ShopContext);
 
   return (
@@ -37,12 +44,11 @@ const ProductItem = ({ Id, image, name, price }: ProductItemProps) => {
             />
           </CardHeader>
           <CardContent className="p-4 bg-background">
-            <CardTitle className="text-lg font-semibold text-text truncate">
+            <CardTitle className="text-lg font-semibold text-text truncate line-clamp-1">
               {name}
             </CardTitle>
-            <CardDescription className="text-secondary">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-              voluptas?
+            <CardDescription className="text-secondary line-clamp-3">
+              {description}
             </CardDescription>
           </CardContent>
           <CardFooter className="flex items-center justify-between px-4 py-2 bg-background border-t">

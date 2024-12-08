@@ -8,11 +8,11 @@ import { motion, useInView } from "motion/react";
 const LatestCollection = () => {
   const { products } = useContext(ShopContext);
   const [latestProducts, setLatestProducts] = useState<Product[]>();
-  const sectionRef = useRef(null); // Reference for the section
-  const isInView = useInView(sectionRef, { once: true }); // Trigger animation once when in view
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true });
 
   useEffect(() => {
-    setLatestProducts(products.slice(0, 8));
+    setLatestProducts(products.slice(0, 6));
   }, []);
 
   return (

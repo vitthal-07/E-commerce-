@@ -20,8 +20,8 @@ a.active hr {
 }
 @media (max-width: 640px) {
   a.active {
-    background-color: #b17457;
-    color: #faf7f0;
+    background-color: #001d3d;
+    color: #e2e2b6;
   }
 }
 @layer base {

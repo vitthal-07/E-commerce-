@@ -48,7 +48,7 @@ const Contact = () => {
           <h2 className="text-2xl font-semibold text-text">
             Contact via WhatsApp
           </h2>
-          <p className="text-secondary mt-2">
+          <p className="text-text mt-2">
             Have questions? Reach out to us directly via WhatsApp. We're here to
             help!
           </p>

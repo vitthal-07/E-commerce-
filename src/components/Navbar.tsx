@@ -1,12 +1,16 @@
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { assets } from "../assets/assets";
+import { FaSearch } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { ShopContext } from "@/context/ShopContext";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const { setShowSearch } = useContext(ShopContext);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +47,7 @@ const Navbar = () => {
           >
             <p>HOME</p>
             <motion.hr
-              className="w-2/3 border-none h-[1.5px] bg-secondary hidden"
+              className="w-2/3 border-none h-[1.5px] bg-[#e2e2b6] hidden"
               whileHover={{ width: "100%", opacity: 1 }}
               transition={{ duration: 0.3 }}
             />
@@ -56,7 +60,7 @@ const Navbar = () => {
             >
               <p>{item.toUpperCase()}</p>
               <motion.hr
-                className="w-2/3 border-none h-[1.5px] bg-secondary hidden"
+                className="w-2/3 border-none h-[1.5px] bg-[#e2e2b6] hidden"
                 whileHover={{ width: "100%", opacity: 1 }}
                 transition={{ duration: 0.3 }}
               />
@@ -66,12 +70,14 @@ const Navbar = () => {
 
         {/* Icons */}
         <div className="flex items-center gap-6">
+          <FaSearch
+            onClick={() => setShowSearch(true)}
+            className="w-6 h-6 cursor-pointer"
+          />
           {/* Hamburger Menu */}
-          <img
+          <GiHamburgerMenu
+            className="w-6 h-6 cursor-pointer sm:hidden block"
             onClick={() => setVisible(true)}
-            src={assets.menu_icon}
-            className="w-5 cursor-pointer sm:hidden"
-            alt="Menu Icon"
           />
         </div>
       </div>
