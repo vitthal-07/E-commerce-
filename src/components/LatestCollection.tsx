@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState, useRef } from "react";
+import { motion, useInView } from "motion/react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
-import Title from "./Title";
 import { Product } from "../types";
 import ProductItem from "./ProductItem";
-import { motion, useInView } from "motion/react";
+import Title from "./Title";
 
 const LatestCollection = () => {
   const { products } = useContext(ShopContext);
@@ -63,6 +63,7 @@ const LatestCollection = () => {
               image={product.image}
               name={product.name}
               price={product.price}
+              description={product.description}
             />
           </motion.div>
         ))}
