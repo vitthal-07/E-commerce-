@@ -14,7 +14,7 @@ const ProductItem = ({ Id, image, name, price }: ProductItemProps) => {
   const { currency } = useContext(ShopContext);
 
   return (
-    <Link to={`/product/${Id}`} className="text-gray-600 cursor-pointer">
+    <Link to={`/product/${Id}`} className="text-text cursor-pointer">
       <motion.div
         className="overflow-hidden relative group"
         whileHover={{ scale: 1.05 }}
@@ -25,13 +25,13 @@ const ProductItem = ({ Id, image, name, price }: ProductItemProps) => {
           src={image[0]}
           alt={name}
         />
-        <motion.div className="absolute inset-0 bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <motion.div className="absolute inset-0 bg-primary bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </motion.div>
 
       <p className="pt-3 pb-1 text-sm font-semibold">{name}</p>
 
       <motion.p
-        className="text-sm font-medium text-gray-800"
+        className="text-sm font-medium text-text"
         whileHover={{ scale: 1.1 }}
         transition={{ duration: 0.2 }}
       >

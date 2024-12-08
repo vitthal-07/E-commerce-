@@ -23,10 +23,10 @@ const LatestCollection = () => {
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8 }}
     >
-      <div className="text-center py-8 text-3xl">
+      <div className="py-8 text-3xl">
         <Title text1="LATEST" text2="COLLECTION" />
         <motion.p
-          className="w-3/4 m-auto text-xs sm:text-base text-gray-600"
+          className="w-3/4 text-xs sm:text-base text-text"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.2, duration: 0.5 }}

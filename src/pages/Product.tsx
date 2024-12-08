@@ -5,31 +5,47 @@ import RelatedProducts from "../components/RelatedProducts";
 import { ShopContext } from "../context/ShopContext";
 import { Product } from "../types";
 import { motion } from "motion/react";
+import { toast } from "react-toastify";
+import { FaWhatsapp } from "react-icons/fa";
 
 const ProductPage = () => {
   const { productId } = useParams<string>();
-  const { products, currency, addToCart } = useContext(ShopContext);
+  const { products, currency, addToCart, phoneNumber } =
+    useContext(ShopContext);
   const [productData, setProductData] = useState<Product>();
   const [image, setImage] = useState<string>("");
   const [size, setSize] = useState<string>("");
 
-  const fetchProductData = async () => {
-    products.map((item) => {
-      if (item._id === productId) {
-        setProductData(item);
-        setImage(item.image[0]);
-        return null;
-      }
-    });
+  const handleBuyNow = (productId: string, size: string) => {
+    if (!size) {
+      toast.error("Please select a size before proceeding!");
+      return;
+    }
+
+    const message = `Hello, I am interested in buying the ${productData?.name} (Size: ${size}) priced at ${currency}${productData?.price}. Please provide further details.`;
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+      message
+    )}`;
+    window.open(whatsappURL, "_blank");
   };
 
   useEffect(() => {
+    const fetchProductData = async () => {
+      products.map((item) => {
+        if (item._id === productId) {
+          setProductData(item);
+          setImage(item.image[0]);
+          return null;
+        }
+      });
+    };
+
     fetchProductData();
-  }, [productId]);
+  }, [productId, products]);
 
   return productData ? (
     <motion.div
-      className="border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100"
+      className="pt-10 transition-opacity ease-in duration-500 opacity-100"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -120,7 +136,7 @@ const ProductPage = () => {
             <p className="pl-2">102</p>
           </motion.div>
           <motion.p
-            className="text-gray-500 mt-3"
+            className="text-secondary mt-3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
@@ -149,8 +165,8 @@ const ProductPage = () => {
               {productData.sizes.map((item, index) => (
                 <motion.button
                   key={index}
-                  className={`border border-gray-100 px-4 py-2 ${
-                    item === size ? "bg-gray-800 text-white" : ""
+                  className={`border border-secondary px-4 py-2 ${
+                    item === size ? "bg-primary text-text" : ""
                   }`}
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.2 }}
@@ -163,16 +179,19 @@ const ProductPage = () => {
           </motion.div>
 
           <motion.button
-            onClick={() => addToCart(productData._id, size)}
-            className="bg-black text-white text-sm py-3 px-8 active:bg-gray-700"
+            className="bg-primary flex gap-2 text-text text-md py-2 px-4 active:bg-secondary cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.3 }}
+            onClick={() => handleBuyNow(productData._id, size)}
           >
-            Add to cart
+            <FaWhatsapp className="text-green-500 text-3xl" />
+            <h2 className="text-lg font-semibold text-text">
+              Contact for bulk order
+            </h2>
           </motion.button>
           <hr className="mt-8 sm:w-4/5" />
-          <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
+          <div className="text-sm text-secondary mt-5 flex flex-col gap-1">
             <p>100% Original product.</p>
             <p>Cash on delivery is available.</p>
             <p>Easy return and exchange policy within 7 days.</p>
@@ -204,7 +223,7 @@ const ProductPage = () => {
           </motion.p>
         </div>
         <motion.div
-          className="flex flex-col gap-4 p-6 text-sm text-gray-500"
+          className="flex flex-col gap-4 p-6 text-sm text-secondary"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.7 }}

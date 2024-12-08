@@ -16,6 +16,7 @@ export const ShopContext = createContext<ShopContextType>({
   getCartCount: () => 0,
   updateQuantity: () => {},
   getCartAmount: () => 0,
+  phoneNumber: "",
 });
 
 type ShopContextType = {
@@ -31,11 +32,13 @@ type ShopContextType = {
   getCartCount: () => number;
   updateQuantity: (itemId: string, size: string, quantity: number) => void;
   getCartAmount: () => number;
+  phoneNumber: string;
 };
 
 const ShopContextProvider = ({ children }: { children: ReactNode }) => {
   const currency = "$";
   const deliveryFee = 10;
+  const phoneNumber = "+919356613671";
   const [search, setSearch] = useState<string>("");
   const [showSearch, setShowSearch] = useState<boolean>(false);
   const [cartItems, setCartItems] = useState<Cart>({});
@@ -110,6 +113,7 @@ const ShopContextProvider = ({ children }: { children: ReactNode }) => {
     getCartCount,
     updateQuantity,
     getCartAmount,
+    phoneNumber,
   };
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
 };

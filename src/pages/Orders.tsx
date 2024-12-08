@@ -16,7 +16,7 @@ const Orders = () => {
         {products.slice(2, 5).map((product, index) => (
           <motion.div
             key={index}
-            className="flex flex-col md:flex-row text-gray-700 md:justify-between md:items-center py-6 gap-6 border-t border-gray-200"
+            className="flex flex-col md:flex-row text-text md:justify-between md:items-center py-6 gap-6 border-t border-secondary"
             initial={{ opacity: 0, y: 20 }} // Initial state for animation
             animate={{ opacity: 1, y: 0 }} // Final state for animation
             transition={{ duration: 0.6, delay: index * 0.2 }} // Delay based on index for staggered animation
@@ -32,7 +32,7 @@ const Orders = () => {
                 transition={{ duration: 0.5, delay: index * 0.3 }} // Delay for staggered animation
               />
               <div>
-                <p className="font-medium text-gray-800">{product.name}</p>
+                <p className="font-medium text-text">{product.name}</p>
                 <div className="flex items-center gap-3 mt-2 text-base text-gray-700">
                   <p className="text-lg font-semibold">
                     {currency}
@@ -41,8 +41,8 @@ const Orders = () => {
                   <p>Quantity: 1</p>
                   <p>Size: M</p>
                 </div>
-                <p className="mt-2 text-sm text-gray-500">
-                  Date: <span className="text-gray-400">25, Jul, 2024</span>
+                <p className="mt-2 text-sm text-text">
+                  Date: <span className="text-secondary">25, Jul, 2024</span>
                 </p>
               </div>
             </div>
@@ -61,7 +61,7 @@ const Orders = () => {
                 </p>
               </div>
               <motion.button
-                className="border border-blue-600 px-4 py-2 text-sm font-medium text-blue-600 rounded-md hover:bg-blue-600 hover:text-white transition-all duration-200"
+                className="border border-secondary px-4 py-2 text-sm font-medium text-text rounded-md hover:bg-primary hover:text-text transition-all duration-200"
                 whileHover={{ scale: 1.1 }} // Button hover effect with scaling
                 whileTap={{ scale: 0.95 }} // Button tap effect with smaller scale
                 transition={{ duration: 0.2 }}

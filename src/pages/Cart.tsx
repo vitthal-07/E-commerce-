@@ -1,11 +1,9 @@
+import { motion } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 import CartTotal from "../components/CartTotal";
 import Title from "../components/Title";
 import { ShopContext } from "../context/ShopContext";
-import { toast } from "react-toastify";
-import { motion } from "motion/react"; // Import Framer Motion
 
 type CartData = {
   _id: string;
@@ -14,20 +12,10 @@ type CartData = {
 };
 
 const Cart = () => {
-  const { products, currency, cartItems, updateQuantity } =
+  const { products, currency, cartItems, updateQuantity, phoneNumber } =
     useContext(ShopContext);
   const [cartData, setCartData] = useState<CartData[]>([]);
-  const navigate = useNavigate();
 
-  const handleCheckout = () => {
-    if (cartData.length === 0) {
-      toast.error("Your cart is empty.");
-      return;
-    }
-    navigate("/checkout");
-  };
-
-  // Memoize cart data for better performance
   useEffect(() => {
     const data = Object.entries(cartItems).reduce(
       (acc: CartData[], [itemId, sizes]) => {
@@ -47,6 +35,28 @@ const Cart = () => {
     setCartData(data);
   }, [cartItems]);
 
+  const handleCheckout = () => {
+    if (cartData.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+
+    const baseUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=Hello! I would like to place an order for the following items:%0A%0A`;
+
+    const items = cartData
+      .map((item) => {
+        const product = products.find((p) => p._id === item._id);
+        if (!product) return null;
+        return `${product.name} - Size: ${item.size} - Quantity: ${item.quantity}`;
+      })
+      .filter(Boolean)
+      .join("%0A");
+
+    const finalUrl = baseUrl + items;
+
+    window.open(finalUrl, "_blank");
+  };
+
   return (
     <div className="border-t pt-14">
       <div className="text-2xl mb-3">
@@ -60,7 +70,7 @@ const Cart = () => {
         ) : (
           cartData.map((item, index) => {
             const product = products.find((p) => p._id === item._id);
-            if (!product) return null; // Handle missing product gracefully
+            if (!product) return null;
             return (
               <motion.div
                 className="py-4 border-b text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4"

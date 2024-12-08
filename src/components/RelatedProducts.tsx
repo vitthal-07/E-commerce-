@@ -36,7 +36,7 @@ const RelatedProducts = ({ category, subCategory }: RelatedProductsProps) => {
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8 }}
     >
-      <div className="text-center text-3xl py-2">
+      <div className="text-3xl py-2">
         <Title text1="RELATED" text2="PRODUCTS" />
       </div>
 
