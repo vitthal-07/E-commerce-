@@ -28,26 +28,26 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 right-0 z-50 lg:px-28 bg-primary shadow-md"
+      className="fixed top-0 left-0 right-0 z-50 lg:px-28 bg-secondary shadow-md rounded-full mx-3 mt-2 sm:mx-auto sm:w-5/6"
       initial={{ y: 0 }}
       animate={{ y: isVisible ? 0 : "-100%" }}
       transition={{ duration: 0.3 }}
     >
-      <div className="flex items-center justify-between py-5 px-6 sm:px-10 font-medium">
+      <div className="flex items-center justify-between py-2 px-6 sm:px-10 font-medium">
         {/* Logo */}
         <Link to="/">
-          <img src={assets.logo} className="w-36" alt="Logo" />
+          <img src={assets.logo} className="h-12" alt="Logo" />
         </Link>
 
         {/* Navigation Links */}
-        <ul className="hidden sm:flex gap-6 text-sm text-text">
+        <ul className="hidden sm:flex gap-6 text-sm text-black">
           <NavLink
             to="/"
             className="flex flex-col items-center gap-1 transition-all"
           >
             <p>HOME</p>
             <motion.hr
-              className="w-2/3 border-none h-[1.5px] bg-[#e2e2b6] hidden"
+              className="w-2/3 border-none h-[1.5px] bg-black hidden"
               whileHover={{ width: "100%", opacity: 1 }}
               transition={{ duration: 0.3 }}
             />
@@ -60,7 +60,7 @@ const Navbar = () => {
             >
               <p>{item.toUpperCase()}</p>
               <motion.hr
-                className="w-2/3 border-none h-[1.5px] bg-[#e2e2b6] hidden"
+                className="w-2/3 border-none h-[1.5px] bg-black hidden"
                 whileHover={{ width: "100%", opacity: 1 }}
                 transition={{ duration: 0.3 }}
               />
@@ -84,11 +84,11 @@ const Navbar = () => {
 
       {/* Sidebar menu for small screens */}
       <div
-        className={`min-h-[100vh] absolute top-0 left-0 overflow-hidden bg-background transition-all ${
+        className={`min-h-[100vh] absolute top-0 left-0 overflow-hidden bg-secondary transition-all ${
           visible ? "w-full" : "w-0"
         }`}
       >
-        <div className="flex flex-col text-text">
+        <div className="flex flex-col text-black">
           <div
             onClick={() => setVisible(false)}
             className="flex items-center gap-4 p-3 cursor-pointer"
