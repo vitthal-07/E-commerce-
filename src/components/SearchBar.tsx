@@ -16,11 +16,11 @@ const SearchBar = () => {
   return (
     showSearch && (
       <div className="text-center">
-        <div className="inline-flex items-center justify-center border-secondary w-3/4 sm:w-full mt-2 gap-3 text-center bg-primary">
+        <div className="inline-flex items-center justify-center border-secondary w-5/6 sm:w-full mt-2 gap-3 text-center bg-primary">
           <input
             type="text"
             placeholder="Search"
-            className="px-5 py-2 flex-1 outline-none bg-inherit text-sm bg-primary text-text"
+            className="px-2 sm:px-5 py-2 flex-1 outline-none bg-inherit text-sm bg-primary text-text"
             value={search}
             onChange={(e) => handleOnChange(e.target.value)}
           />

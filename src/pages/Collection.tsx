@@ -35,7 +35,7 @@ const Collection: React.FC = () => {
   );
 
   return (
-    <div className="py-10 px-20">
+    <div className="py-10 md:px-20">
       {Object.keys(groupedProducts).length > 0 ? (
         Object.entries(groupedProducts).map(([category, categoryProducts]) => (
           <motion.div
