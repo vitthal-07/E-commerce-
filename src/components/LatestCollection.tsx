@@ -1,5 +1,5 @@
-import { motion, useInView } from "motion/react";
-import { useContext, useEffect, useRef, useState } from "react";
+import { motion } from "motion/react";
+import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import { Product } from "../types";
 import ProductItem from "./ProductItem";
@@ -8,12 +8,10 @@ import Title from "./Title";
 const LatestCollection = () => {
   const { products, loading } = useContext(ShopContext);
   const [latestProducts, setLatestProducts] = useState<Product[]>();
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true });
 
   useEffect(() => {
     setLatestProducts(products?.slice(0, 6));
-  }, [loading]);
+  }, [loading, products]);
 
   if (loading) {
     return <div className="text-md font-normal mt-3">Loading Products....</div>;
@@ -22,9 +20,8 @@ const LatestCollection = () => {
   return (
     <motion.div
       className="my-10"
-      ref={sectionRef}
       initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
       <div className="py-8 text-3xl">
@@ -32,7 +29,7 @@ const LatestCollection = () => {
         <motion.p
           className="w-3/4 text-xs sm:text-base text-text"
           initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
+          animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet autem
@@ -43,7 +40,7 @@ const LatestCollection = () => {
       <motion.div
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-6"
         initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
+        animate="visible"
         variants={{
           hidden: { opacity: 0 },
           visible: {
