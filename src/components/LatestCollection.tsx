@@ -15,6 +15,10 @@ const LatestCollection = () => {
     setLatestProducts(products.slice(0, 6));
   }, [loading]);
 
+  if (loading) {
+    return <div className="text-md font-normal">Loading....</div>;
+  }
+
   return (
     <motion.div
       className="my-10"
@@ -50,9 +54,7 @@ const LatestCollection = () => {
           },
         }}
       >
-        {loading ? (
-          <div className="text-md font-normal">Loading....</div>
-        ) : (
+        {latestProducts && (
           latestProducts?.map((product, index) => (
             <motion.div
               key={index}

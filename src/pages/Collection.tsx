@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { Product } from "@/types";
 
 const Collection: React.FC = () => {
-  const { products, search } = useContext(ShopContext);
+  const { products, search, loading } = useContext(ShopContext);
 
   // Function to create a case-insensitive search regex with word boundaries
   const createSearchRegex = (term: string) => {
@@ -34,6 +34,9 @@ const Collection: React.FC = () => {
     {}
   );
 
+  if (loading) {
+    return <div className="text-md font-normal">Loading....</div>;
+  }
   return (
     <div className="py-10 md:px-20">
       {Object.keys(groupedProducts).length > 0 ? (
