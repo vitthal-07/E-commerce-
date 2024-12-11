@@ -12,11 +12,11 @@ const LatestCollection = () => {
   const isInView = useInView(sectionRef, { once: true });
 
   useEffect(() => {
-    setLatestProducts(products.slice(0, 6));
+    setLatestProducts(products?.slice(0, 6));
   }, [loading]);
 
   if (loading) {
-    return <div className="text-md font-normal">Loading....</div>;
+    return <div className="text-md font-normal mt-3">Loading Products....</div>;
   }
 
   return (
@@ -54,25 +54,23 @@ const LatestCollection = () => {
           },
         }}
       >
-        {latestProducts && (
-          latestProducts?.map((product, index) => (
-            <motion.div
-              key={index}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
-            >
-              <ProductItem
-                Id={product._id}
-                image={product.imageUrls}
-                name={product.name}
-                price={product.price}
-                description={product.description}
-              />
-            </motion.div>
-          ))
-        )}
+        {latestProducts?.map((product, index) => (
+          <motion.div
+            key={index}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
+          >
+            <ProductItem
+              Id={product._id}
+              image={product.imageUrls}
+              name={product.name}
+              price={product.price}
+              description={product.description}
+            />
+          </motion.div>
+        ))}
       </motion.div>
     </motion.div>
   );
