@@ -25,7 +25,7 @@ const ProductPage = () => {
       products.map((item) => {
         if (item._id === productId) {
           setProductData(item);
-          setImage(item.image[0]);
+          setImage(item.imageUrls[0]);
           return null;
         }
       });
@@ -50,7 +50,7 @@ const ProductPage = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            {productData.image.map((item, index) => (
+            {productData.imageUrls.map((item, index) => (
               <motion.img
                 key={index}
                 src={item}
@@ -183,10 +183,7 @@ const ProductPage = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.8 }}
       >
-        <RelatedProducts
-          category={productData.category}
-          subCategory={productData.subCategory}
-        />
+        <RelatedProducts category={productData.category} />
       </motion.div>
     </motion.div>
   ) : (

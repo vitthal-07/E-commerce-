@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FloatingIcon from "./components/FloatingIcon";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import SearchBar from "./components/SearchBar";
-import FloatingIcon from "./components/FloatingIcon";
 
 const App = () => {
   const location = useLocation();

@@ -1,6 +1,7 @@
+import { motion } from "motion/react";
 import { useContext } from "react";
-import { ShopContext } from "../context/ShopContext";
 import { Link } from "react-router-dom";
+import { ShopContext } from "../context/ShopContext";
 import {
   Card,
   CardContent,
@@ -9,7 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { motion } from "motion/react";
 
 type ProductItemProps = {
   Id: string;

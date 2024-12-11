@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
-import { assets } from "../assets/assets";
 import { motion } from "motion/react";
 import {
   FaFacebookF,
-  FaTwitter,
   FaInstagram,
   FaLinkedinIn,
+  FaTwitter,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { assets } from "../assets/assets";
 
 const Footer = () => {
   return (
@@ -127,7 +127,7 @@ const Footer = () => {
       >
         <hr className="border-primary" />
         <p className="py-5 text-center text-background">
-          © 2024 MyWeb.com. All rights reserved.
+          © 2024 tidkess.com. All rights reserved.
         </p>
       </motion.div>
     </motion.footer>

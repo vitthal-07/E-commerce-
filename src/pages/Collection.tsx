@@ -68,7 +68,7 @@ const Collection: React.FC = () => {
                 >
                   <ProductItem
                     Id={product._id}
-                    image={product.image}
+                    image={product.imageUrls}
                     name={product.name}
                     price={product.price}
                     description={product.description}

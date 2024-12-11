@@ -1,10 +1,10 @@
+import { ShopContext } from "@/context/ShopContext";
 import { motion } from "motion/react";
 import { useContext, useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { assets } from "../assets/assets";
 import { FaSearch } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { ShopContext } from "@/context/ShopContext";
+import { Link, NavLink } from "react-router-dom";
+import { assets } from "../assets/assets";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);

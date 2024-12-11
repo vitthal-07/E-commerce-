@@ -1,16 +1,15 @@
-import { useContext, useEffect, useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { useContext, useEffect, useRef, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import { Product } from "../types";
-import Title from "./Title";
 import ProductItem from "./ProductItem";
-import { motion, useInView } from "framer-motion";
+import Title from "./Title";
 
 type RelatedProductsProps = {
   category: string;
-  subCategory: string;
 };
 
-const RelatedProducts = ({ category, subCategory }: RelatedProductsProps) => {
+const RelatedProducts = ({ category }: RelatedProductsProps) => {
   const { products } = useContext(ShopContext);
   const [related, setRelated] = useState<Product[]>([]);
   const sectionRef = useRef(null);
@@ -20,9 +19,7 @@ const RelatedProducts = ({ category, subCategory }: RelatedProductsProps) => {
     if (products.length > 0) {
       let productsCopy = [...products];
       productsCopy = productsCopy.filter((product) => {
-        return (
-          product.category === category && product.subCategory === subCategory
-        );
+        return product.category === category;
       });
       setRelated(productsCopy.slice(0, 5));
     }
@@ -66,7 +63,7 @@ const RelatedProducts = ({ category, subCategory }: RelatedProductsProps) => {
               Id={item._id}
               name={item.name}
               price={item.price}
-              image={item.image}
+              image={item.imageUrls}
               description={item.description}
             />
           </motion.div>

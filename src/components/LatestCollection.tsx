@@ -6,14 +6,14 @@ import ProductItem from "./ProductItem";
 import Title from "./Title";
 
 const LatestCollection = () => {
-  const { products } = useContext(ShopContext);
+  const { products, loading } = useContext(ShopContext);
   const [latestProducts, setLatestProducts] = useState<Product[]>();
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true });
 
   useEffect(() => {
     setLatestProducts(products.slice(0, 6));
-  }, []);
+  }, [loading]);
 
   return (
     <motion.div
@@ -50,23 +50,27 @@ const LatestCollection = () => {
           },
         }}
       >
-        {latestProducts?.map((product, index) => (
-          <motion.div
-            key={index}
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
-            }}
-          >
-            <ProductItem
-              Id={product._id}
-              image={product.image}
-              name={product.name}
-              price={product.price}
-              description={product.description}
-            />
-          </motion.div>
-        ))}
+        {loading ? (
+          <div className="text-md font-normal">Loading....</div>
+        ) : (
+          latestProducts?.map((product, index) => (
+            <motion.div
+              key={index}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 },
+              }}
+            >
+              <ProductItem
+                Id={product._id}
+                image={product.imageUrls}
+                name={product.name}
+                price={product.price}
+                description={product.description}
+              />
+            </motion.div>
+          ))
+        )}
       </motion.div>
     </motion.div>
   );
